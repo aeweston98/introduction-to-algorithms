@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class chapterTwo {
     public void insertSort(int[] inp){
 
@@ -12,12 +14,55 @@ public class chapterTwo {
             inp[i+1] = key;
         }
     }
-    public int[] addBinaryArrays(int[] src1, int[] src2){
-        int[] dest = {};
+    private void merge(int[]inp, int a, int b, int c){
+        int n1 = b-a+1;
+        int n2 = c-b;
 
-        //no need for bounds checking
-        //for(int i = 0; i < src1.length;)
+        int[] l1 = new int[n1];
+        for(int i = 0; i < n1; i++){
+            l1[i] = inp[a+i];
+        }
 
-        return dest;
+        int[] l2 = new int[n2];
+        for(int i = 0; i < n2; i++){
+            l2[i] = inp[b+i+1];
+        }
+
+        int i = 0;
+        int j = 0;
+        int k = a;
+
+        while(i < n1 && j < n2){
+            if(l1[i] <= l2[j]){
+                inp[k] = l1[i];
+                i++;
+            }
+            else {
+                inp[k] = l2[j];
+                j++;
+            }
+            k++;
+        }
+
+        while(j<n2){
+            inp[k] = l2[j];
+            k++;
+            j++;
+        }
+
+        while (i < n1) {
+            inp[k] = l1[i];
+            k++;
+            i++;
+        }
+    }
+
+    public void mergeSort(int[] inp, int a, int c){
+        if(c>a){
+            int b = (c+a)/2;
+            mergeSort(inp,a,b);
+            mergeSort(inp,b+1,c);
+            merge(inp,a,b,c);
+        }
     }
 }

@@ -1,6 +1,6 @@
 public class execute {
     public static void main(String[] args){
-        int[] arr = {-1, 20, -56, 12, 887, 91, -100};
+        int[] arr= {-1, 20, -56, 12, 887, 91, -100};
         chapterTwo c = new chapterTwo();
 
         System.out.println("Before sorting");
@@ -9,7 +9,7 @@ public class execute {
         }
         System.out.println("");
 
-        c.insertSort(arr);
+        c.mergeSort(arr,0, arr.length-1);
 
         System.out.println("After sorting");
         for(int i = 0; i < arr.length; i++){
