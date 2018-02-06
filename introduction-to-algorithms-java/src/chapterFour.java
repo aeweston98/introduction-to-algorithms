@@ -46,4 +46,61 @@ public class chapterFour {
             }
         }
     }
+
+    public triple linearMaxSubArray(int[] A){
+        int maxStart = 0;
+        int maxEnd = 0;
+        int maxVal = A[0];
+        int curEnd = 0;
+        int curVal = A[0];
+
+        for(int i = 1; i < A.length; i++){
+            int t = A[i];
+
+            if(maxVal < 0){
+                if(t >= maxVal){
+                    maxVal = t;
+                    maxStart = i;
+                    maxEnd = i;
+                    curVal = t;
+                    curEnd = i;
+                }
+            }
+            else if(t > maxVal){
+                if(curVal > 0){
+                    curVal += t;
+                    maxVal = curVal;
+                    maxEnd = i;
+                    curEnd = i;
+                }
+                else{
+                    maxVal = t;
+                    maxStart = i;
+                    maxEnd = i;
+                    curEnd = i;
+                    curVal = t;
+                }
+            }
+            else{
+                if(t > 0){
+                    maxEnd = i;
+                    curEnd = i;
+                    curVal += t;
+                    maxVal = curVal;
+                }
+                else{
+                    curEnd = i;
+                    curVal += t;
+                }
+            }
+        }
+
+        triple t = new triple(maxStart,maxEnd,maxVal);
+        return t;
+    }
+
+    public void SquareMatrixMultiply(int size, squareMatrix A, squareMatrix B, squareMatrix c){
+
+        if()
+    }
 }
