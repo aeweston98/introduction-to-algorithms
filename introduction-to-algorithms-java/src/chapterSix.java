@@ -17,7 +17,6 @@ public class chapterSix {
         }
 
         if(largest != i){
-            System.out.println("looo");
             exchange(h.A, i, largest);
             maxHeapify(h, largest);
         }
@@ -25,7 +24,6 @@ public class chapterSix {
 
     private void buildMaxHeap(heap h){
         for(int i = (h.A.length/2) - 1; i >= 0; i--){
-            System.out.println(i);
             maxHeapify(h, i);
         }
     }
@@ -44,14 +42,45 @@ public class chapterSix {
         return i*2 + 2;
     }
 
+    private int parent(int i){
+        return (i-1)/2;
+    }
+
     public void heapsort(int[] A){
         heap h = new heap(A);
         buildMaxHeap(h);
-        
+
         for(int i = h.A.length - 1; i >= 1; i--){
             exchange(h.A, i, 0);
             h.heapsize--;
             maxHeapify(h, 0);
+        }
+    }
+
+    public int heapMaximum(heap h){
+        return h.A[0];
+    }
+
+    public int heapExtract(heap h){
+        if(h.heapsize < 1){
+            System.out.println("Error - heap underflow");
+            return -1;
+        }
+        int max = h.A[0];
+        h.A[0] = h.A[h.heapsize-1];
+        h.heapsize--;
+        maxHeapify(h, 0);
+        return max;
+    }
+
+    public void heapIncreaseKey(heap h, int i, int key){
+        if(key < h.A[i]){
+            System.out.println("Error - New key less than current key");
+        }
+        h.A[i] = key;
+        while(i > 0 && h.A[parent(i)] < h.A[i]){
+            exchange(h.A, parent(i), i);
+            i = parent(i);
         }
     }
 }
